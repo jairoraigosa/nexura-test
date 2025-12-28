@@ -12,12 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empleado_rol', function (Blueprint $table) {
-            $table->foreignId('empleado_id')->comment('Identificador del empleado')->constrained('empleados')->onDelete('cascade');
-            $table->foreignId('rol_id')->comment('Identificador del rol')->constrained('roles')->onDelete('cascade');
+            $table->integer('empleado_id')->unsigned()->comment('Identificador del empleado');
+            $table->integer('rol_id')->unsigned()->comment('Identificador del rol');
             $table->timestamps();
 
             // Primary key compuesta
             $table->primary(['empleado_id', 'rol_id']);
+
+            // Foreign keys
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
+            $table->foreign('rol_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

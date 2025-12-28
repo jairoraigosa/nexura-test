@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('areas', function (Blueprint $table) {
-            $table->id()->comment('Identificador del área');
+            $table->integer('id')->unsigned()->primary()->comment('Identificador del área');
             $table->string('nombre', 255)->comment('Nombre del área de la empresa');
             $table->timestamps();
         });
